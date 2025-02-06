@@ -7,20 +7,73 @@ import {
 } from "@radix-ui/react-icons";
 import Badge from "./Badge";
 
+/**
+ * Represents an option in the select dropdown.
+ */
 interface SelectOption {
+  /**
+   * The display label for the option.
+   */
   label: string;
+
+  /**
+   * The underlying value of the option.
+   */
   value: string;
+
+  /**
+   * Indicates whether the option is selected.
+   * @default false
+   */
   selected?: boolean;
 }
 
+/**
+ * Props for the Select component.
+ */
 interface SelectProps {
+  /**
+   * The list of available options.
+   */
   options: SelectOption[];
+
+  /**
+   * The currently selected values.
+   */
   selectedValues: SelectOption[];
+
+  /**
+   * Callback function triggered when the selection changes.
+   * @param selectedList - The updated list of selected options.
+   */
   onSelectChange: (selectedList: SelectOption[]) => void;
+
+  /**
+   * If true, enables multi-selection mode.
+   * @default false
+   */
   multiple?: boolean;
+
+  /**
+   * If true, enables a search input within the dropdown.
+   * @default true
+   */
   withSearch?: boolean;
+
+  /**
+   * If true, applies an outline style to the select component.
+   * @default true
+   */
   outline?: boolean;
+
+  /**
+   * The label displayed above the select component.
+   */
   label?: string;
+
+  /**
+   * The placeholder text shown when no selection is made.
+   */
   placeholder?: string;
 }
 
@@ -138,15 +191,15 @@ const SelectDropdown = (props: SelectProps) => {
 
   const togglePopOver = (): void => setIsOpen((prev) => !prev);
   return (
-    <div className="flex items-center px-2 max-w-96">
-      {label && <label className="w-1/4 text-gray-900">{label}</label>}
+    <div className="flex items-center px-2 w-full">
+      {label && <label className="w-1/8 text-gray-900">{label}</label>}
       <Popover.Root open={isOpen} onOpenChange={setIsOpen}>
         <Popover.Trigger asChild>
           <button
             onClick={togglePopOver}
             className={`[&_svg]:pointer-events-auto min-h-12 inline-flex p-2 items-center justify-between gap-2 rounded text-lg shadow-sm shadow-black/10 outline-none focus:shadow-xs focus:shadow-gray-100 data-[placeholder]:text-black border border-gray-200 hover:border-gray-500 cursor-pointer ${
               outline ? " " : "bg-gray-300"
-            } ${label ? " w-3/4 " : "w-full "}`}
+            } ${label ? " w-7/8 " : "w-full "}`}
           >
             {selectedValues.length === 0 && (
               <p className="text-gray-900 text-sm">

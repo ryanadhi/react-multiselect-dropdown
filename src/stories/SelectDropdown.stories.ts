@@ -10,6 +10,8 @@ const meta: Meta<typeof SelectDropdown> = {
     multiple: { control: "boolean" },
     withSearch: { control: "boolean" },
     outline: { control: "boolean" },
+    usePortal: { control: "boolean" },
+    zIndex: { control: "number" },
   },
   tags: ["autodocs"],
 };
@@ -25,6 +27,8 @@ export const Default: Story = {
     multiple: true,
     withSearch: true,
     outline: true,
+    usePortal: true,
+    zIndex: 1200,
     options: [
       { label: "Option 1", value: "option1" },
       { label: "Option with Icon", value: "optionWithIcon" },

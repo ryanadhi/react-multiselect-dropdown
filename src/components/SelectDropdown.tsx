@@ -81,6 +81,8 @@ interface SelectProps {
    * @default 1100
    */
   zIndex?: number;
+
+  usePortal?: boolean;
 }
 
 const SelectDropdown = (props: SelectProps) => {
@@ -96,6 +98,7 @@ const SelectDropdown = (props: SelectProps) => {
     label,
     placeholder,
     zIndex = 1100,
+    usePortal = true,
   } = props;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -197,6 +200,44 @@ const SelectDropdown = (props: SelectProps) => {
   };
 
   const togglePopOver = (): void => setIsOpen((prev) => !prev);
+
+  const popoverContent = (
+    <>
+      {withSearch && (
+        <div className="border border-gray-200 p-2 rounded-t-md flex items-center gap-2">
+          <SearchIcon className="w-6 h-6" />
+          <input
+            className="w-full p-1 outline-none focus:outline-none focus:ring-0"
+            placeholder="Search.."
+            value={searchText}
+            onChange={(e) => handleSearchInput(e)}
+          />
+          <CloseIcon
+            className="rounded-full cursor-pointer bg-gray-300 p-0.5"
+            onClick={() => setSearchText("")}
+          />
+        </div>
+      )}
+      <div
+        className={`border border-gray-200 py-2 rounded-b-md shadow-md ${
+          !withSearch ? "rounded-t-md " : " "
+        }`}
+      >
+        {filteredOptions.map((item: SelectOption, i: number) => (
+          <div
+            onClick={() => onSelect(item)}
+            key={i}
+            className={`text-gray-900 cursor-pointer hover:bg-teal-50 p-2 rounded-md hover:border-teal-50 focus:outline-none ${
+              item.selected ? "bg-teal-50 " : " "
+            }`}
+          >
+            {getHighlightedText(item.label)}
+          </div>
+        ))}
+      </div>
+    </>
+  );
+
   return (
     <div className="flex items-center px-2 w-full">
       {label && <label className="w-1/4 md:w-1/8 text-gray-900">{label}</label>}
@@ -243,13 +284,33 @@ const SelectDropdown = (props: SelectProps) => {
             <ChevronDownIcon className="min-h-4 min-w-4" />
           </button>
         </Popover.Trigger>
-        <Popover.Portal>
+        {usePortal ? (
+          <Popover.Portal>
+            <Popover.Content
+              onEscapeKeyDown={togglePopOver}
+              className={`PopoverContent bg-white rounded-md p-2 min-w-[var(--radix-popover-trigger-width)] max-h-[var(--radix-popover-content-available-height)] z-[${zIndex}]`}
+              sideOffset={5}
+            >
+              {popoverContent}
+            </Popover.Content>
+          </Popover.Portal>
+        ) : (
           <Popover.Content
             onEscapeKeyDown={togglePopOver}
             className={`PopoverContent bg-white rounded-md p-2 min-w-[var(--radix-popover-trigger-width)] max-h-[var(--radix-popover-content-available-height)] z-[${zIndex}]`}
             sideOffset={5}
           >
-            {withSearch && (
+            {popoverContent}
+          </Popover.Content>
+        )}
+        {/* <Popover.Portal>
+          <Popover.Content
+            onEscapeKeyDown={togglePopOver}
+            className={`PopoverContent bg-white rounded-md p-2 min-w-[var(--radix-popover-trigger-width)] max-h-[var(--radix-popover-content-available-height)] z-[${zIndex}]`}
+            sideOffset={5}
+          >
+            {popoverContent} */}
+        {/* {withSearch && (
               <div className="border border-gray-200 p-2 rounded-t-md flex items-center gap-2">
                 <SearchIcon className="w-6 h-6" />
                 <input
@@ -280,9 +341,9 @@ const SelectDropdown = (props: SelectProps) => {
                   {getHighlightedText(item.label)}
                 </div>
               ))}
-            </div>
-          </Popover.Content>
-        </Popover.Portal>
+            </div> */}
+        {/* </Popover.Content>
+        </Popover.Portal> */}
       </Popover.Root>
     </div>
   );

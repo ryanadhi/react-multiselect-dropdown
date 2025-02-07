@@ -31,11 +31,13 @@ function App() {
     withSearch: boolean;
     outline: boolean;
     zIndexElement: boolean;
+    usePortal: boolean;
   }>({
     multiple: true,
     withSearch: true,
     outline: true,
     zIndexElement: false,
+    usePortal: true,
   });
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,9 +56,10 @@ function App() {
           outline={controls.outline}
           label="Tech stack"
           placeholder="Pick your tech"
+          usePortal={controls.usePortal}
         />
       </div>
-      <div className="flex gap-10">
+      <div className="grid grid-cols-3">
         <Checkbox
           label="Multiple"
           checked={controls.multiple}
@@ -74,15 +77,23 @@ function App() {
           checked={controls.withSearch}
           id="withSearch"
           onChange={handleCheckboxChange}
-        />{" "}
+        />
         <Checkbox
-          label="Element with z-index 1000"
+          label="Use portal"
+          checked={controls.usePortal}
+          id="usePortal"
+          onChange={handleCheckboxChange}
+        />
+        <Checkbox
+          label="Element z-index 1000"
           checked={controls.zIndexElement}
           id="zIndexElement"
           onChange={handleCheckboxChange}
         />
       </div>
-      {controls.zIndexElement && <div className="h-16 w-16 bg-amber-400 z-[1000]"></div>}
+      {controls.zIndexElement && (
+        <div className="h-16 w-16 bg-amber-400 z-[1000]"></div>
+      )}
     </main>
   );
 }

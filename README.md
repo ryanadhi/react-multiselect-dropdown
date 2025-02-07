@@ -21,39 +21,59 @@ Make sure you have Node.js and npm (or yarn) installed on your machine.
    ```bash
    git clone https://github.com/ryanadhi/react-multiselect-dropdown.git
    cd react-multiselect-dropdown
+   ```
+
 2. **Install dependencies**
 
 - Using npm:
 
-   ```bash
-   npm install
+  ```bash
+  npm install
+  ```
+
 - Using yarn:
 
-    ```bash
-   yarn install
+  ```bash
+  yarn install
+  ```
+
 ### Running the Project Locally
 
 To start the development server:
 
 - Using npm:
 
-   ```bash
-   npm run dev
+  ```bash
+  npm run dev
+  ```
+
 - Using yarn:
 
-    ```bash
-    yarn dev
+  ```bash
+  yarn dev
+  ```
+
 The project should now be running on http://localhost:5173.
+
 ### Running Storybook Locally
+
 To start Storybook:
 
 - Using npm:
 
-   ```bash
-   npm run storybook
+  ```bash
+  npm run storybook
+  ```
+
 - Using yarn:
 
-    ```bash
-    yarn storybook
-Storybook should now be running on http://localhost:6006
+  ```bash
+  yarn storybook
+  ```
 
+Storybook should now be running on http://localhost:6006.
+
+## Deployment
+
+- **Main Project**: [React Multiselect Dropdown](https://react-multiselect-dropdown.netlify.app/)
+- **Storybook**: [Storybook for React Multiselect Dropdown](https://storybook-react-multiselect.netlify.app/)

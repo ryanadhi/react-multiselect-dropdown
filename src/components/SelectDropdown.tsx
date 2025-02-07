@@ -75,6 +75,12 @@ interface SelectProps {
    * The placeholder text shown when no selection is made.
    */
   placeholder?: string;
+
+  /**
+   * Custom z-index if necessary.
+   * @default 1100
+   */
+  zIndex?: number;
 }
 
 const SelectDropdown = (props: SelectProps) => {
@@ -89,6 +95,7 @@ const SelectDropdown = (props: SelectProps) => {
     onSelectChange,
     label,
     placeholder,
+    zIndex = 1100,
   } = props;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -99,7 +106,7 @@ const SelectDropdown = (props: SelectProps) => {
         options.map((option) => ({ ...option, selected: false }))
       );
     }
-  }, [props.options]);
+  }, [options]);
 
   const updateFilteredOptionByValue = (
     val: string,
@@ -192,14 +199,14 @@ const SelectDropdown = (props: SelectProps) => {
   const togglePopOver = (): void => setIsOpen((prev) => !prev);
   return (
     <div className="flex items-center px-2 w-full">
-      {label && <label className="w-1/8 text-gray-900">{label}</label>}
+      {label && <label className="w-1/4 md:w-1/8 text-gray-900">{label}</label>}
       <Popover.Root open={isOpen} onOpenChange={setIsOpen}>
         <Popover.Trigger asChild>
           <button
             onClick={togglePopOver}
             className={`[&_svg]:pointer-events-auto min-h-12 inline-flex p-2 items-center justify-between gap-2 rounded text-lg shadow-sm shadow-black/10 outline-none focus:shadow-xs focus:shadow-gray-100 data-[placeholder]:text-black border border-gray-200 hover:border-gray-500 cursor-pointer ${
               outline ? " " : "bg-gray-300"
-            } ${label ? " w-7/8 " : "w-full "}`}
+            } ${label ? " w-3/4 md:w-7/8" : "w-full "}`}
           >
             {selectedValues.length === 0 && (
               <p className="text-gray-900 text-sm">
@@ -238,9 +245,8 @@ const SelectDropdown = (props: SelectProps) => {
         </Popover.Trigger>
         <Popover.Portal>
           <Popover.Content
-            onInteractOutside={togglePopOver}
             onEscapeKeyDown={togglePopOver}
-            className="PopoverContent bg-white rounded-md p-2 min-w-[var(--radix-popover-trigger-width)] max-h-[var(--radix-popover-content-available-height)]"
+            className={`PopoverContent bg-white rounded-md p-2 min-w-[var(--radix-popover-trigger-width)] max-h-[var(--radix-popover-content-available-height)] z-[${zIndex}]`}
             sideOffset={5}
           >
             {withSearch && (

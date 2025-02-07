@@ -1,7 +1,18 @@
 import { Cross2Icon as CloseIcon } from "@radix-ui/react-icons";
 
+/**
+ * Props for the Badge component.
+ */
 interface BadgeProps {
+  /**
+   * Text content displayed inside the badge.
+   */
   text: string;
+
+  /**
+   * Callback function triggered when the icon inside the badge is clicked.
+   * @param e - The mouse event from the icon click.
+   */
   onIconClick: (e: React.MouseEvent) => void;
 }
 

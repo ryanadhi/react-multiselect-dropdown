@@ -43,6 +43,8 @@ function App() {
   });
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.name === "multiple") setSelectedValues([]);
+
     setControls((prev) => ({ ...prev, [e.target.name]: e.target.checked }));
   };
 

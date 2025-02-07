@@ -68,12 +68,6 @@ interface SelectProps {
   placeholder?: string;
 
   /**
-   * Custom z-index if necessary.
-   * @default 1100
-   */
-  zIndex?: number;
-
-  /**
    * If true, renders the dropdown in a portal to prevent clipping issues.
    * @default true
    */

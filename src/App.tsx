@@ -47,7 +47,28 @@ function App() {
   };
 
   return (
-    <main className="flex flex-col w-screen justify-center items-center h-screen space-y-8">
+    <main className="flex flex-col w-screen items-center h-screen space-y-10 p-20">
+      <div className="flex flex-col gap-4">
+        <h1 className="text-xl md:text-3xl font-bold tracking-wide">
+          React Multiselect Dropdown
+        </h1>
+        <div className="flex justify-evenly">
+          <a
+            href="https://github.com/ryanadhi/react-multiselect-dropdown"
+            className="underline text-blue-800 hover:text-black hover:bg-blue-200 p-1 rounded-sm transition-all"
+            target="__blank"
+          >
+            Github
+          </a>
+          <a
+            href="https://storybook-react-multiselect.netlify.app"
+            className="underline text-blue-800 hover:text-black hover:bg-blue-200 p-1 rounded-sm transition-all"
+            target="__blank"
+          >
+            Storybook
+          </a>
+        </div>
+      </div>
       <div className="w-3/4">
         <SelectDropdown
           options={options}
@@ -111,7 +132,7 @@ function App() {
         />
       </div>
       {controls.zIndexElement && (
-        <div className="h-16 w-16 bg-amber-400 z-[1000]"></div>
+        <div className="h-16 w-16 bg-amber-400 z-[100]"></div>
       )}
     </main>
   );

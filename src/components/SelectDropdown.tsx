@@ -77,12 +77,6 @@ interface SelectProps {
   placeholder?: string;
 
   /**
-   * Custom z-index if necessary.
-   * @default 1100
-   */
-  zIndex?: number;
-
-  /**
    * If true, renders the dropdown in a portal to prevent clipping issues.
    * @default true
    */
@@ -109,7 +103,6 @@ const SelectDropdown = (props: SelectProps) => {
     onSelectChange,
     label,
     placeholder,
-    zIndex = 1100,
     usePortal = true,
     renderOption,
   } = props;
@@ -307,7 +300,7 @@ const SelectDropdown = (props: SelectProps) => {
           <Popover.Portal>
             <Popover.Content
               onEscapeKeyDown={togglePopOver}
-              className={`PopoverContent bg-white rounded-md p-2 min-w-[var(--radix-popover-trigger-width)] max-h-[var(--radix-popover-content-available-height)] z-[${zIndex}]`}
+              className="PopoverContent bg-white rounded-md p-2 min-w-[var(--radix-popover-trigger-width)] max-h-[var(--radix-popover-content-available-height)]"
               sideOffset={5}
             >
               {popoverContent}
@@ -316,53 +309,12 @@ const SelectDropdown = (props: SelectProps) => {
         ) : (
           <Popover.Content
             onEscapeKeyDown={togglePopOver}
-            className={`PopoverContent bg-white rounded-md p-2 min-w-[var(--radix-popover-trigger-width)] max-h-[var(--radix-popover-content-available-height)] z-[${zIndex}]`}
+            className="PopoverContent bg-white rounded-md p-2 min-w-[var(--radix-popover-trigger-width)] max-h-[var(--radix-popover-content-available-height)]"
             sideOffset={5}
           >
             {popoverContent}
           </Popover.Content>
         )}
-        {/* <Popover.Portal>
-          <Popover.Content
-            onEscapeKeyDown={togglePopOver}
-            className={`PopoverContent bg-white rounded-md p-2 min-w-[var(--radix-popover-trigger-width)] max-h-[var(--radix-popover-content-available-height)] z-[${zIndex}]`}
-            sideOffset={5}
-          >
-            {popoverContent} */}
-        {/* {withSearch && (
-              <div className="border border-gray-200 p-2 rounded-t-md flex items-center gap-2">
-                <SearchIcon className="w-6 h-6" />
-                <input
-                  className="w-full p-1 outline-none focus:outline-none focus:ring-0"
-                  placeholder="Search.."
-                  value={searchText}
-                  onChange={(e) => handleSearchInput(e)}
-                />
-                <CloseIcon
-                  className="rounded-full cursor-pointer bg-gray-300 p-0.5"
-                  onClick={() => setSearchText("")}
-                />
-              </div>
-            )}
-            <div
-              className={`border border-gray-200 py-2 rounded-b-md shadow-md ${
-                !withSearch ? "rounded-t-md " : " "
-              }`}
-            >
-              {filteredOptions.map((item: SelectOption, i: number) => (
-                <div
-                  onClick={() => onSelect(item)}
-                  key={i}
-                  className={`text-gray-900 cursor-pointer hover:bg-teal-50 p-2 rounded-md hover:border-teal-50 focus:outline-none ${
-                    item.selected ? "bg-teal-50 " : " "
-                  }`}
-                >
-                  {getHighlightedText(item.label)}
-                </div>
-              ))}
-            </div> */}
-        {/* </Popover.Content>
-        </Popover.Portal> */}
       </Popover.Root>
     </div>
   );

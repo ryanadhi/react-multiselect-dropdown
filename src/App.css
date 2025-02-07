@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+[data-radix-popper-content-wrapper] {
+    z-index: 9999 !important;
+    /* or any other value you need */
+}
+
 /* styles.css */
 .PopoverContent {
     animation-duration: 0.6s;

@@ -17,6 +17,14 @@
     },
     "./dist/index.css": "./dist/index.css"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanadhi/react-multiselect-dropdown.git"
+  },
+  "homepage": "https://react-multiselect-dropdown.netlify.app/",
+  "bugs": {
+    "url": "https://github.com/ryanadhi/react-multiselect-dropdown/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

@@ -82,7 +82,19 @@ interface SelectProps {
    */
   zIndex?: number;
 
+  /**
+   * If true, renders the dropdown in a portal to prevent clipping issues.
+   * @default true
+   */
   usePortal?: boolean;
+
+  /**
+   * Custom rendering function for options.
+   * Allows for fully customizable dropdown items.
+   * @param option - The option data to render.
+   * @returns A React node representing the custom option.
+   */
+  renderOption?: (option: SelectOption) => React.ReactNode;
 }
 
 const SelectDropdown = (props: SelectProps) => {
@@ -99,6 +111,7 @@ const SelectDropdown = (props: SelectProps) => {
     placeholder,
     zIndex = 1100,
     usePortal = true,
+    renderOption,
   } = props;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -223,17 +236,23 @@ const SelectDropdown = (props: SelectProps) => {
           !withSearch ? "rounded-t-md " : " "
         }`}
       >
-        {filteredOptions.map((item: SelectOption, i: number) => (
-          <div
-            onClick={() => onSelect(item)}
-            key={i}
-            className={`text-gray-900 cursor-pointer hover:bg-teal-50 p-2 rounded-md hover:border-teal-50 focus:outline-none ${
-              item.selected ? "bg-teal-50 " : " "
-            }`}
-          >
-            {getHighlightedText(item.label)}
-          </div>
-        ))}
+        {filteredOptions.map((item: SelectOption, i: number) =>
+          renderOption ? (
+            <div key={i} onClick={() => onSelect(item)}>
+              {renderOption(item)}
+            </div>
+          ) : (
+            <div
+              onClick={() => onSelect(item)}
+              key={i}
+              className={`text-gray-900 cursor-pointer hover:bg-teal-50 p-2 rounded-md hover:border-teal-50 focus:outline-none ${
+                item.selected ? "bg-teal-50 " : " "
+              }`}
+            >
+              {getHighlightedText(item.label)}
+            </div>
+          )
+        )}
       </div>
     </>
   );

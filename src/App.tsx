@@ -32,12 +32,14 @@ function App() {
     outline: boolean;
     zIndexElement: boolean;
     usePortal: boolean;
+    renderOption: boolean;
   }>({
     multiple: true,
     withSearch: true,
     outline: true,
     zIndexElement: false,
     usePortal: true,
+    renderOption: false,
   });
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,9 +59,20 @@ function App() {
           label="Tech stack"
           placeholder="Pick your tech"
           usePortal={controls.usePortal}
+          renderOption={
+            controls.renderOption
+              ? (option) => (
+                  <div className="flex items-center gap-2 p-2 bg-teal-50 hover:bg-amber-50 rounded-md cursor-pointer">
+                    <span className="text-sm font-semibold font-serif tracking-tight">
+                      {option.label}
+                    </span>
+                  </div>
+                )
+              : undefined
+          }
         />
       </div>
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3 space-x-6 space-y-2">
         <Checkbox
           label="Multiple"
           checked={controls.multiple}
@@ -82,6 +95,12 @@ function App() {
           label="Use portal"
           checked={controls.usePortal}
           id="usePortal"
+          onChange={handleCheckboxChange}
+        />
+        <Checkbox
+          label="Custom render option"
+          checked={controls.renderOption}
+          id="renderOption"
           onChange={handleCheckboxChange}
         />
         <Checkbox

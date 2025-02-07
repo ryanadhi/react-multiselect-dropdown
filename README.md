@@ -45,12 +45,12 @@ To build and package your project without publishing it to npm:
     - Using npm:
 
       ```bash
-      npm run build
+      npm run build:package
       ```
     - Using yarn:
 
       ```bash
-      yarn build
+      yarn build:package
       ```
 
     The output will be placed in the `dist/` folder, including:

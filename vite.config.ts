@@ -7,9 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    dts({
-      outDir: "dist",
-    }),
+    dts({ outDir: "dist", clearPureImport: true, rollupTypes: true }),
   ],
   build: {
     lib: {

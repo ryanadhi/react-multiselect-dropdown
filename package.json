@@ -28,7 +28,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build --mode web",
-    "build-package": "tsc -b && vite build --mode package",
+    "build:package": "tsc -b && vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",

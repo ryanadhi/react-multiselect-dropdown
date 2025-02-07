@@ -3,6 +3,8 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import dts from "vite-plugin-dts";
 
+const isPackageBuild = process.env.BUILD_MODE === "package";
+
 export default defineConfig({
   plugins: [
     react(),
@@ -10,16 +12,20 @@ export default defineConfig({
     dts({ outDir: "dist", clearPureImport: true, rollupTypes: true }),
   ],
   build: {
-    lib: {
-      entry: "src/index.ts",
-      name: "ReactMultiselectDropdown",
-      formats: ["es", "cjs"],
-      fileName: (format) => `index.${format === "es" ? "mjs" : "js"}`,
-    },
+    lib: isPackageBuild
+      ? {
+          entry: "src/index.ts",
+          name: "ReactMultiselectDropdown",
+          formats: ["es", "cjs"],
+          fileName: (format) => `index.${format === "es" ? "mjs" : "js"}`,
+        }
+      : undefined,
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: isPackageBuild ? ["react", "react-dom"] : [],
       output: {
-        assetFileNames: "index.css",
+        assetFileNames: isPackageBuild
+          ? "index.css"
+          : "assets/[name].[hash].css",
         globals: {
           react: "React",
           "react-dom": "ReactDOM",

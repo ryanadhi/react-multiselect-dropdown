@@ -27,3 +27,7 @@ dist-ssr
 
 # Yarn
 .yarn/install-state.gz
+
+
+.env.web
+.env.package
